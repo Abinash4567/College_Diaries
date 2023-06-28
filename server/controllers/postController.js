@@ -28,6 +28,8 @@ exports.homepage = async(req, res) => {
     }
   }
   
+
+
   /**
    * GET /categories
    * Categories 
@@ -93,10 +95,43 @@ exports.searchpost = async(req, res) => {
   catch (error)
    {
     res.satus(500).send({message: error.message || "Error Occured" });
-  }
-  
+   }
 }
 
+
+
+exports.exploreLatest = async(req, res)=>{
+  try{
+    const limitNumber = 16;
+    const post_cont = await post.find({}).sort( {_id:-1} ).limit(limitNumber)
+    res.render('explore-latest', { title: 'Campus Diaries - Latest Post', post_cont });
+  }
+  catch(error)
+  {
+    res.status(500).send({ message: error.messsage || "Error Occured"});
+  }
+}
+
+
+exports.exploreRandom = async(req, res)=>{
+  try{
+    let total_count = await post.find().countDocuments();
+    let random = Math.floor(Math.random() * total_count);
+    let post_content = await post.findOne().skip(random).exec();
+
+    res.render('explore-random', { title: 'Campus Diaries - Random Post', post_content });
+  }
+  catch(error)
+  {
+    res.status(500).send({ message: error.messsage || "Error Occured"});
+  }
+}
+
+
+
+exports.submitPost = async(req, res)=>{
+  res.render("submit-post", {title: "Campus Diaries - Submit Post"});
+}
 
 
 
