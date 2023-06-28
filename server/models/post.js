@@ -27,5 +27,6 @@ const postSchema = new mongoose.Schema({
   });
   
   postSchema.index({ name: 'text', description: 'text' });    ///indexing for search
+  postSchema.index({ "$**": 'text'});              //arbitary if add later
   
   module.exports = mongoose.model('post', postSchema);

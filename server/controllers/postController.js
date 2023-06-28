@@ -43,18 +43,6 @@ exports.homepage = async(req, res) => {
   } 
 
 
-    /*          GET /post          */
-    exports.exploreCategories = async(req, res) => {
-      try {
-        const limitNumber = 16;
-        const categories = await Category.find({}).limit(limitNumber);
-        res.render('categories', { title: 'Campus Diaries - Categories', categories } );
-      } catch (error) {
-        res.satus(500).send({message: error.message || "Error Occured" });
-      }
-    } 
-
-
 
     /**
  * GET /categories/:id
@@ -90,11 +78,6 @@ exports.exploreCategoriesById = async(req, res) => {
         res.status(500).send({ message: error.messsage || "Error Occured"});
       }
     }
-
-
-
-
-
 
 
 
