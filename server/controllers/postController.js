@@ -128,9 +128,61 @@ exports.exploreRandom = async(req, res)=>{
 }
 
 
-
+//       POST submit post
 exports.submitPost = async(req, res)=>{
-  res.render("submit-post", {title: "Campus Diaries - Submit Post"});
+  const infoErrorsObj = req.flash('infoErrors');
+  const infoSubmitObj = req.flash('infoSubmit');
+
+  res.render("submit-post", {title: "Campus Diaries - Submit Post", infoErrorsObj, infoSubmitObj});
+}
+
+
+
+
+exports.submitfinal = async(req, res)=>{
+  try{
+
+    let imageUploadFile;
+    let uploadPath;
+    let newImageName;
+
+    if(!req.files || Object.keys(req.files).length === 0){
+      console.log('No Files where uploaded.');
+    } 
+    else {
+      imageUploadFile = req.files.image;
+      newImageName = Date.now() + imageUploadFile.name;
+
+      uploadPath = require('path').resolve('./') + '/public/uploads/' + newImageName;
+
+      imageUploadFile.mv(uploadPath, function(err){
+        if(err) return res.satus(500).send(err);
+      })
+
+    }
+
+
+    var new_post = new post({
+      name: req.body.name,
+      description: req.body.description,
+      email: req.body.email,
+      category: req.body.category,
+      Requirement: req.body.requirements,
+      image: newImageName
+    });
+
+      new_post.save();
+      
+      req.flash('infoSubmit', 'Post has been added.')
+      res.redirect('/submit-post');
+  }
+  
+  catch (error) 
+  {
+    // res.json(error);             //Error Object
+    req.flash('infoErrors', error);
+    res.redirect('/submit-post');
+  }
 }
 
 
@@ -140,6 +192,28 @@ exports.submitPost = async(req, res)=>{
 
 
 
+
+// Delete 
+// async function delete(){
+//   try {
+//     await post.deleteOne({ name: ' From Posts' });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+// delete();
+
+
+// Update 
+// async function updateposts(){
+//   try {
+//     const res = await post.updateOne({ name: 'New Post' });
+//     res.n;                                   // Number of documents matched
+//     res.nModified;                                        // Number of documents modified
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 
 
 

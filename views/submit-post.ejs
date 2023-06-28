@@ -1,0 +1,118 @@
+<div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold">Submit Your Post</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead">Share your opinion, views among Collegues.Fill out this form to get started.</p>
+    </div>
+  </div>
+  
+  <div class="row justify-content-center" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: bold;">
+
+    <% if(infoSubmitObj != '') { %>
+        <div class="col-8 alert alert-success" role="alert">
+          <%= infoSubmitObj %>
+        </div>
+      <% } %>
+    
+      <% if(infoErrorsObj != '') { %>
+        <div class="col-8 alert alert-danger" role="alert">
+          <%= infoErrorsObj[0].message %>
+        </div>
+      <% } %>
+  
+    <div class="col-8">
+  
+      <form action="/submit-post" enctype="multipart/form-data" method="POST">
+      
+        <div class="row g-3">
+  
+
+
+          <div class="col-12">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" id="email" class="form-control">
+          </div>
+  
+
+
+
+          <div class="col-12">
+            <label for="name" class="form-label">Title</label>
+            <input type="text" name="name" id="name" class="form-control" required>
+          </div>
+
+
+          
+          <div class="col-12">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="description" id="description" class="form-control" cols="30" rows="4"></textarea>
+          </div>
+  
+
+
+          <div class="col-12">
+            <label for="name" class="form-label">Any prerequisites: for vacancy only</label><br>
+            <small>Example: Good Communicaiton Skill</small>
+            <div class="requirementList">
+              <div class="requirementDiv mb-1">
+                <input type="text" name="requirements" class="form-control">
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-12">
+            <button type="button" class="btn btn-outline-primary" id="addrequirementsBtn">+ Prerequisites</button>
+          </div>
+  
+
+
+
+
+
+          <div class="col-12">
+            <label for="category">Select Category</label>
+            <select class="form-select form-control" name="category" aria-label="Category">
+              <option selected>Select Category</option>
+              <option value="Aero Club">Aero Club</option>
+              <option value="Robotics Club">Robotics Club</option>
+              <option value="Astrowing">Astrowing CLub</option>
+              <option value="Chess Club">Chess Club</option>
+              <option value="Athletics" >Athletics</option>
+              <option value="Football Club" >Football Club</option>
+              <option value="Cricket Club" >Cricket Club</option>
+              <option value="Kabbadi Club" >Kabaddi Club</option>
+              <option value="Steering" >Steering Club</option>
+              <option value="Media House" >Meida House</option>
+              <option value="Rotract" >Rotract Club</option>
+              <option value="Senior Mentor" >Senior Mentor</option>
+              <option value="Coding Club" >Coding Club</option>
+              <option value="Literacy">Literacy</option>
+              <option value="Dramatics">Dramatics</option>
+              <option value="Green Club">Green Club</option>
+            </select>
+          </div>
+  
+
+
+
+
+
+
+
+
+
+
+          <div class="col-12">
+            <label for="image">Product Image</label>
+            <input type="file" class="form-control" name="image" accept="image/*">
+          </div>
+  
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Submit Recipe</button>
+          </div>
+  
+        </div>
+      
+      </form>
+  
+    </div>
+  </div>

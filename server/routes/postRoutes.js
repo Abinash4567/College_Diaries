@@ -11,11 +11,6 @@ router.post('/search', postController.searchpost);
 router.get('/explore-latest', postController.exploreLatest);
 router.get('/explore-random', postController.exploreRandom);
 router.get('/submit-post', postController.submitPost);
-
-
-
-
-
-
+router.post('/submit-post', postController.submitfinal);
 
 module.exports = router;
