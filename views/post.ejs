@@ -1,0 +1,41 @@
+<% if(post_cont != null ) { %>
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><%- post_cont.name %></li>
+      </ol>
+    </nav>
+  
+  
+    <div class="row">
+  
+      <div class="col-12 col-md-4">
+        <img src="/uploads/<%- post_cont.image %>" class="img-fluid sticky-top" style="top: 20px;" alt="<%- post_cont.name %>" loading="lazy">
+      </div>
+      <div class="col-12 col-md-8">
+        <div class="row">
+          <div class="col-12"><h1><%- post_cont.name %></h1></div>
+          <div class="col-12 mb-4"><i class="bi bi-tag"></i> <%- post_cont.category %></div>
+          <div class="col-12" style="white-space: pre-line; font-family: Georgia, 'Times New Roman', Times, serif; font-size: large;">
+            <%- post_cont.description %>
+          </div>
+        </div>
+  
+        <% if(post_cont.Requirement.length>0) {%>
+        <div class="row pt-4" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: large; font-weight: 500;">
+          <div class="col-12">
+            <h4>Requirement:</h4>
+            <ul class="list-group list-group-flush">
+              <% post_cont.Requirement.forEach(function(Requirement, index){ %>
+                <li class="list-group-item"><%= Requirement %></li>
+              <% }) %>
+            </ul> 
+          </div>
+        </div>
+    <% } %>
+      </div>
+    </div>
+  <% } else { %>
+    <p>No item found.</p>
+  <% } %>
